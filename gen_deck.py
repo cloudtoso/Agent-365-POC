@@ -9,59 +9,94 @@ prs = Presentation()
 prs.slide_width = Inches(13.333)
 prs.slide_height = Inches(7.5)
 
-# === COLOR PALETTE ===
-MS_BLUE = RGBColor(0x00, 0x78, 0xD4)
-DARK_NAVY = RGBColor(0x00, 0x20, 0x50)
-TEAL_ACCENT = RGBColor(0x00, 0xBC, 0xF2)
-LIGHT_GRAY_BG = RGBColor(0xF5, 0xF5, 0xF5)
-DARK_GRAY = RGBColor(0x33, 0x33, 0x33)
-MID_GRAY = RGBColor(0x6E, 0x6E, 0x6E)
-FOOTER_GRAY = RGBColor(0x99, 0x99, 0x99)
+# === COLOR PALETTE (BAR Light theme from reference deck) ===
+DK1 = RGBColor(0x00, 0x00, 0x00)
+LT1 = RGBColor(0xFF, 0xFF, 0xFF)
+DK2 = RGBColor(0x09, 0x1F, 0x2E)       # Dark navy
+LT2 = RGBColor(0xFF, 0xF8, 0xF3)       # Warm cream
+ACCENT1 = RGBColor(0x70, 0x25, 0x73)   # Purple
+ACCENT2 = RGBColor(0xBF, 0x3A, 0xC4)   # Bright magenta
+ACCENT3 = RGBColor(0xFE, 0x5B, 0x38)   # Orange-red
+ACCENT4 = RGBColor(0xD5, 0x9D, 0xD7)   # Light lavender
+ACCENT5 = RGBColor(0xFE, 0xE2, 0x98)   # Light gold
+ACCENT6 = RGBColor(0xD7, 0xD2, 0xCA)   # Warm gray
+HLINK = RGBColor(0x00, 0x77, 0xD3)     # Blue link
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
-BULLET_BLUE = RGBColor(0x00, 0x5A, 0x9E)
+BODY_TEXT = RGBColor(0x00, 0x00, 0x00)  # Black body text
+FOOTER_GRAY = RGBColor(0xD7, 0xD2, 0xCA)
+
+# Derived colors for visual elements
+CONTENT_BOX_BORDER = RGBColor(0xF4, 0xED, 0xF4)  # Very light purple (accent1 at 5% lum)
+HEADER_GRADIENT_1 = RGBColor(0xBA, 0xBA, 0xFF)   # Light blue-purple
+HEADER_GRADIENT_2 = RGBColor(0x27, 0x64, 0xE7)   # Medium blue
+WARM_GRAY_BG = RGBColor(0xF2, 0xF0, 0xED)        # bg1 at 95% luminosity
 
 SLIDE_W = Inches(13.333)
 SLIDE_H = Inches(7.5)
 
+# Font families matching reference deck
+FONT_HEADING = 'Segoe UI Semibold'
+FONT_BODY = 'Segoe Sans Display'
+FONT_BODY_BOLD = 'Segoe Sans Display Semibold'
+
 # === GRADIENT HELPER ===
-def set_gradient_fill(shape, color1, color2, angle=0):
-    """Apply a two-stop linear gradient fill to a shape."""
+def set_gradient_fill(shape, stops, angle=0):
+    """Apply a multi-stop linear gradient fill. stops = [(pos, (r,g,b), alpha), ...]"""
     spPr = shape._element.spPr
-    # Remove existing fill
     for child in list(spPr):
         if child.tag.endswith('}solidFill') or child.tag.endswith('}gradFill') or child.tag.endswith('}noFill'):
             spPr.remove(child)
     gradFill = spPr.makeelement(qn('a:gradFill'), {})
     gsLst = gradFill.makeelement(qn('a:gsLst'), {})
-    # Stop 1
-    gs1 = gsLst.makeelement(qn('a:gs'), {'pos': '0'})
-    srgb1 = gs1.makeelement(qn('a:srgbClr'), {'val': '%02X%02X%02X' % (color1[0], color1[1], color1[2])})
-    gs1.append(srgb1)
-    gsLst.append(gs1)
-    # Stop 2
-    gs2 = gsLst.makeelement(qn('a:gs'), {'pos': '100000'})
-    srgb2 = gs2.makeelement(qn('a:srgbClr'), {'val': '%02X%02X%02X' % (color2[0], color2[1], color2[2])})
-    gs2.append(srgb2)
-    gsLst.append(gs2)
+    for pos, color, alpha in stops:
+        gs = gsLst.makeelement(qn('a:gs'), {'pos': str(pos)})
+        srgb = gs.makeelement(qn('a:srgbClr'), {'val': '%02X%02X%02X' % (color[0], color[1], color[2])})
+        if alpha < 100000:
+            alpha_elem = srgb.makeelement(qn('a:alpha'), {'val': str(alpha)})
+            srgb.append(alpha_elem)
+        gs.append(srgb)
+        gsLst.append(gs)
     gradFill.append(gsLst)
-    lin = gradFill.makeelement(qn('a:lin'), {'ang': str(angle * 60000), 'scaled': '1'})
+    lin = gradFill.makeelement(qn('a:lin'), {'ang': str(int(angle * 60000)), 'scaled': '1'})
     gradFill.append(lin)
     spPr.append(gradFill)
+
+def set_solid_fill_alpha(shape, r, g, b, alpha=100000):
+    """Solid fill with optional transparency."""
+    shape.fill.solid()
+    shape.fill.fore_color.rgb = RGBColor(r, g, b)
+    if alpha < 100000:
+        solidFill = shape._element.spPr.find(qn('a:solidFill'))
+        if solidFill is not None:
+            srgbClr = solidFill.find(qn('a:srgbClr'))
+            if srgbClr is not None:
+                alpha_elem = srgbClr.makeelement(qn('a:alpha'), {'val': str(alpha)})
+                srgbClr.append(alpha_elem)
 
 def no_line(shape):
     shape.line.fill.background()
 
-# === FOOTER ===
-def add_footer(slide):
-    """Add subtle footer text to bottom of slide."""
-    footer_box = slide.shapes.add_textbox(Inches(0.8), Inches(7.0), Inches(4), Inches(0.4))
+# === FOOTER BAR ===
+def add_footer_bar(slide):
+    """Warm gray footer bar matching reference deck style."""
+    bar = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE, Inches(1.17), Inches(6.0),
+        Inches(12.16), Inches(0.98)
+    )
+    no_line(bar)
+    set_gradient_fill(bar, [
+        (0, (0xF2, 0xF0, 0xED), 100000),
+        (100000, (0xF2, 0xF0, 0xED), 30000),
+    ], angle=0)
+    # Footer text inside bar
+    footer_box = slide.shapes.add_textbox(Inches(1.78), Inches(6.2), Inches(4), Inches(0.4))
     tf = footer_box.text_frame
     tf.word_wrap = False
     p = tf.paragraphs[0]
     p.text = 'Agent 365  |  Proof of Value'
     p.font.size = Pt(9)
-    p.font.color.rgb = FOOTER_GRAY
-    p.font.name = 'Segoe UI Light'
+    p.font.color.rgb = DK2
+    p.font.name = FONT_BODY
     p.alignment = PP_ALIGN.LEFT
 
 # === NOTES ===
@@ -70,155 +105,185 @@ def add_notes(slide, notes_text):
     tf = notes_slide.notes_text_frame
     tf.text = notes_text
 
-# === CONTENT SLIDE (REDESIGNED) ===
-def add_title_bar(slide, title_text):
-    """85% width title band with rounded feel, positioned with left margin."""
-    bar_width = Inches(11.333)  # ~85% of slide width
-    bar = slide.shapes.add_shape(
-        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.7), Inches(0.45),
-        bar_width, Inches(1.1)
+# === CONTENT SLIDE (Matching BAR Light reference theme) ===
+def add_content_container(slide):
+    """Outer rounded rectangle with gradient border effect."""
+    outer = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.62), Inches(1.90),
+        Inches(12.09), Inches(3.80)
     )
-    bar.fill.solid()
-    bar.fill.fore_color.rgb = MS_BLUE
-    no_line(bar)
-    # Minimal corner rounding
-    bar.adjustments[0] = 0.04
-    tf = bar.text_frame
+    no_line(outer)
+    # Gradient: very light purple to very light cream
+    set_gradient_fill(outer, [
+        (0, (0xF4, 0xED, 0xF4), 100000),    # Light purple tint
+        (100000, (0xF5, 0xF2, 0xEE), 100000), # Light warm cream
+    ], angle=0)
+    outer.adjustments[0] = 0.03
+    return outer
+
+def add_inner_content_box(slide):
+    """White inner rounded rectangle for content area."""
+    inner = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.93), Inches(2.20),
+        Inches(11.30), Inches(3.30)
+    )
+    inner.fill.solid()
+    inner.fill.fore_color.rgb = WHITE
+    no_line(inner)
+    inner.adjustments[0] = 0.03
+    return inner
+
+def add_title_text(slide, title_text):
+    """Title at top of content slide, matching reference positioning."""
+    title_box = slide.shapes.add_textbox(
+        Inches(0.62), Inches(0.50), Inches(11.02), Inches(0.55)
+    )
+    tf = title_box.text_frame
     tf.word_wrap = True
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-    tf.margin_left = Inches(0.5)
-    tf.margin_right = Inches(0.3)
     p = tf.paragraphs[0]
     p.text = title_text
-    p.font.size = Pt(24)
-    p.font.color.rgb = WHITE
-    p.font.name = 'Segoe UI Semibold'
-    p.font.bold = True
+    p.font.size = Pt(22)
+    p.font.color.rgb = DK2
+    p.font.name = FONT_HEADING
+    p.font.bold = False
     p.alignment = PP_ALIGN.LEFT
 
-def add_accent_line(slide):
-    """Thin teal accent line below the title bar."""
-    line = slide.shapes.add_shape(
-        MSO_SHAPE.RECTANGLE, Inches(0.7), Inches(1.65),
-        Inches(2.5), Inches(0.04)
+def add_header_band(slide, header_text):
+    """Gradient header band inside the content container."""
+    band = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.93), Inches(1.95),
+        Inches(11.30), Inches(0.50)
     )
-    line.fill.solid()
-    line.fill.fore_color.rgb = TEAL_ACCENT
-    no_line(line)
+    no_line(band)
+    # Multi-stop gradient matching reference: purple-blue tones
+    set_gradient_fill(band, [
+        (0, (0xBA, 0xBA, 0xFF), 100000),
+        (22000, (0x27, 0x64, 0xE7), 100000),
+        (74000, (0x35, 0x27, 0x36), 82191),
+        (99000, (0x09, 0x1F, 0x2E), 77965),
+    ], angle=230)
+    band.adjustments[0] = 0.0
+    # Header text
+    tf = band.text_frame
+    tf.word_wrap = True
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    tf.margin_left = Inches(0.3)
+    p = tf.paragraphs[0]
+    p.text = header_text
+    p.font.size = Pt(14)
+    p.font.color.rgb = WHITE
+    p.font.name = FONT_HEADING
+    p.alignment = PP_ALIGN.LEFT
 
 def add_bullets(slide, bullets):
-    """Styled bullets with visual hierarchy - em-dash markers, proper spacing."""
-    left_margin = Inches(1.2)
-    top = Inches(2.0)
-    txBox = slide.shapes.add_textbox(left_margin, top, Inches(10.5), Inches(4.8))
+    """Styled bullets matching reference: Segoe Sans Display, proper indentation."""
+    txBox = slide.shapes.add_textbox(
+        Inches(1.11), Inches(2.55), Inches(10.95), Inches(3.0)
+    )
     tf = txBox.text_frame
     tf.word_wrap = True
     for i, bullet in enumerate(bullets):
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        # Use em-dash bullet marker for visual distinction
-        p.text = '\u2014  ' + bullet
+        p.text = bullet
         p.font.size = Pt(16)
-        p.font.color.rgb = DARK_GRAY
-        p.font.name = 'Segoe UI'
-        p.space_after = Pt(16)
+        p.font.color.rgb = BODY_TEXT
+        p.font.name = FONT_BODY
+        p.space_after = Pt(12)
         p.space_before = Pt(4)
-        # Indent formatting
         p.level = 0
+        # Indent with hanging indent matching reference
         pPr = p._p.get_or_add_pPr()
-        pPr.set('marL', str(int(Inches(0.3))))
-        pPr.set('indent', str(int(Inches(-0.3))))
+        pPr.set('marL', str(228600))    # 0.25in
+        pPr.set('indent', str(-228600))  # hanging indent
+        # Add bullet character
+        buFont = pPr.makeelement(qn('a:buFont'), {'typeface': 'Arial'})
+        buChar = pPr.makeelement(qn('a:buChar'), {'char': '\u2022'})
+        # Remove existing bullet elements if any
+        for existing in pPr.findall(qn('a:buFont')):
+            pPr.remove(existing)
+        for existing in pPr.findall(qn('a:buChar')):
+            pPr.remove(existing)
+        for existing in pPr.findall(qn('a:buNone')):
+            pPr.remove(existing)
+        pPr.append(buFont)
+        pPr.append(buChar)
 
 def add_slide_bg(slide):
-    """Add subtle light gray background."""
-    bg_shape = slide.shapes.add_shape(
-        MSO_SHAPE.RECTANGLE, Inches(0), Inches(0), SLIDE_W, SLIDE_H
-    )
-    bg_shape.fill.solid()
-    bg_shape.fill.fore_color.rgb = LIGHT_GRAY_BG
-    no_line(bg_shape)
-    # Send to back
-    sp = bg_shape._element
-    sp.getparent().remove(sp)
-    slide.shapes._spTree.insert(2, sp)
+    """White background (matching reference deck lt1)."""
+    bg = slide.background
+    fill = bg.fill
+    fill.solid()
+    fill.fore_color.rgb = WHITE
 
 def content_slide(title, bullets, notes=''):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_slide_bg(slide)
-    add_title_bar(slide, title)
-    add_accent_line(slide)
+    add_title_text(slide, title)
+    add_content_container(slide)
+    add_inner_content_box(slide)
     add_bullets(slide, bullets)
-    add_footer(slide)
+    add_footer_bar(slide)
     if notes:
         add_notes(slide, notes)
     return slide
 
-# === SECTION DIVIDER (REDESIGNED) ===
+# === SECTION DIVIDER (Matching reference Section_Gradient style) ===
 def section_divider(title, subtitle=''):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    # Full-slide gradient background (dark navy to MS blue)
+    # Full-slide gradient: purple to dark navy (matching BAR Light accent1 -> dk2)
     bg = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE, Inches(0), Inches(0), SLIDE_W, SLIDE_H
     )
     no_line(bg)
-    set_gradient_fill(bg, (0x00, 0x20, 0x50), (0x00, 0x78, 0xD4), angle=135)
+    set_gradient_fill(bg, [
+        (0, (0x70, 0x25, 0x73), 100000),    # accent1 purple
+        (100000, (0x09, 0x1F, 0x2E), 100000), # dk2 dark navy
+    ], angle=135)
 
-    # Geometric accent — subtle diamond shape, semi-transparent feel
+    # Subtle geometric accent — warm gray circle, low opacity
     accent = slide.shapes.add_shape(
-        MSO_SHAPE.DIAMOND, Inches(9.5), Inches(0.5), Inches(3.0), Inches(3.0)
+        MSO_SHAPE.OVAL, Inches(9.5), Inches(0.5), Inches(3.5), Inches(3.5)
     )
-    accent.fill.solid()
-    accent.fill.fore_color.rgb = RGBColor(0x00, 0x5A, 0x9E)
     no_line(accent)
-    # Set transparency via alpha
-    solidFill = accent._element.spPr.find(qn('a:solidFill'))
-    if solidFill is not None:
-        srgbClr = solidFill.find(qn('a:srgbClr'))
-        if srgbClr is not None:
-            alpha = srgbClr.makeelement(qn('a:alpha'), {'val': '25000'})
-            srgbClr.append(alpha)
+    set_solid_fill_alpha(accent, 0xD7, 0xD2, 0xCA, alpha=20000)
 
-    # Second geometric accent — bottom left
+    # Second accent — lavender circle bottom left
     accent2 = slide.shapes.add_shape(
-        MSO_SHAPE.DIAMOND, Inches(0.5), Inches(4.5), Inches(2.5), Inches(2.5)
+        MSO_SHAPE.OVAL, Inches(0.2), Inches(4.5), Inches(3.0), Inches(3.0)
     )
-    accent2.fill.solid()
-    accent2.fill.fore_color.rgb = TEAL_ACCENT
     no_line(accent2)
-    solidFill2 = accent2._element.spPr.find(qn('a:solidFill'))
-    if solidFill2 is not None:
-        srgbClr2 = solidFill2.find(qn('a:srgbClr'))
-        if srgbClr2 is not None:
-            alpha2 = srgbClr2.makeelement(qn('a:alpha'), {'val': '15000'})
-            srgbClr2.append(alpha2)
+    set_solid_fill_alpha(accent2, 0xD5, 0x9D, 0xD7, alpha=15000)
 
-    # Title text centered
-    title_box = slide.shapes.add_textbox(Inches(2), Inches(2.5), Inches(9.333), Inches(2.0))
+    # Horizontal accent line
+    divider_line = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE, Inches(0.62), Inches(4.49),
+        Inches(5.0), Inches(0.03)
+    )
+    divider_line.fill.solid()
+    divider_line.fill.fore_color.rgb = ACCENT4
+    no_line(divider_line)
+
+    # Title text — left-aligned matching reference section layout
+    title_box = slide.shapes.add_textbox(Inches(0.62), Inches(3.03), Inches(8.96), Inches(1.35))
     tf = title_box.text_frame
     tf.word_wrap = True
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     p.text = title
-    p.font.size = Pt(40)
+    p.font.size = Pt(36)
     p.font.color.rgb = WHITE
-    p.font.name = 'Segoe UI Light'
-    p.font.bold = True
-    p.alignment = PP_ALIGN.CENTER
+    p.font.name = FONT_HEADING
+    p.font.bold = False
+    p.alignment = PP_ALIGN.LEFT
     if subtitle:
         p2 = tf.add_paragraph()
         p2.text = subtitle
-        p2.font.size = Pt(22)
-        p2.font.color.rgb = TEAL_ACCENT
-        p2.font.name = 'Segoe UI'
-        p2.alignment = PP_ALIGN.CENTER
-        p2.space_before = Pt(12)
-
-    # Thin horizontal accent line
-    divider_line = slide.shapes.add_shape(
-        MSO_SHAPE.RECTANGLE, Inches(5.5), Inches(4.7), Inches(2.333), Inches(0.04)
-    )
-    divider_line.fill.solid()
-    divider_line.fill.fore_color.rgb = TEAL_ACCENT
-    no_line(divider_line)
+        p2.font.size = Pt(20)
+        p2.font.color.rgb = ACCENT4
+        p2.font.name = FONT_BODY
+        p2.alignment = PP_ALIGN.LEFT
+        p2.space_before = Pt(8)
 
     return slide
 
@@ -227,82 +292,75 @@ def hide_slide(slide):
 
 # === TITLE SLIDE ===
 slide = prs.slides.add_slide(prs.slide_layouts[6])
-# Gradient background
+# Gradient background: purple to dark navy (matching section dividers / title layouts)
 bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0), Inches(0), SLIDE_W, SLIDE_H)
 no_line(bg)
-set_gradient_fill(bg, (0x00, 0x20, 0x50), (0x00, 0x78, 0xD4), angle=120)
+set_gradient_fill(bg, [
+    (0, (0x70, 0x25, 0x73), 100000),    # accent1 purple
+    (50000, (0x35, 0x27, 0x36), 100000), # mid purple-navy
+    (100000, (0x09, 0x1F, 0x2E), 100000), # dk2 dark navy
+], angle=120)
 
-# Large geometric accent - top right
-accent_tr = slide.shapes.add_shape(MSO_SHAPE.DIAMOND, Inches(9.0), Inches(-1.0), Inches(5.0), Inches(5.0))
-accent_tr.fill.solid()
-accent_tr.fill.fore_color.rgb = RGBColor(0x00, 0x5A, 0x9E)
+# Subtle circular accent - top right (warm gray, very low opacity)
+accent_tr = slide.shapes.add_shape(MSO_SHAPE.OVAL, Inches(9.0), Inches(-1.0), Inches(5.0), Inches(5.0))
 no_line(accent_tr)
-solidFill = accent_tr._element.spPr.find(qn('a:solidFill'))
-if solidFill is not None:
-    srgbClr = solidFill.find(qn('a:srgbClr'))
-    if srgbClr is not None:
-        alpha = srgbClr.makeelement(qn('a:alpha'), {'val': '20000'})
-        srgbClr.append(alpha)
+set_solid_fill_alpha(accent_tr, 0xD7, 0xD2, 0xCA, alpha=15000)
 
-# Small accent - bottom left
-accent_bl = slide.shapes.add_shape(MSO_SHAPE.DIAMOND, Inches(-0.5), Inches(5.5), Inches(3.0), Inches(3.0))
-accent_bl.fill.solid()
-accent_bl.fill.fore_color.rgb = TEAL_ACCENT
+# Lavender accent - bottom left
+accent_bl = slide.shapes.add_shape(MSO_SHAPE.OVAL, Inches(-0.5), Inches(5.0), Inches(3.5), Inches(3.5))
 no_line(accent_bl)
-solidFill2 = accent_bl._element.spPr.find(qn('a:solidFill'))
-if solidFill2 is not None:
-    srgbClr2 = solidFill2.find(qn('a:srgbClr'))
-    if srgbClr2 is not None:
-        alpha2 = srgbClr2.makeelement(qn('a:alpha'), {'val': '12000'})
-        srgbClr2.append(alpha2)
+set_solid_fill_alpha(accent_bl, 0xD5, 0x9D, 0xD7, alpha=12000)
 
 # Title text block
-title_box = slide.shapes.add_textbox(Inches(1.5), Inches(2.0), Inches(9.0), Inches(4.0))
+title_box = slide.shapes.add_textbox(Inches(0.62), Inches(3.03), Inches(8.96), Inches(3.5))
 tf = title_box.text_frame
 tf.word_wrap = True
-tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+tf.vertical_anchor = MSO_ANCHOR.TOP
 # Main title
 p = tf.paragraphs[0]
 p.text = 'Agent 365'
-p.font.size = Pt(52)
+p.font.size = Pt(48)
 p.font.color.rgb = WHITE
-p.font.name = 'Segoe UI Light'
-p.font.bold = True
+p.font.name = FONT_HEADING
+p.font.bold = False
 p.alignment = PP_ALIGN.LEFT
 # Subtitle
 p2 = tf.add_paragraph()
 p2.text = 'Proof of Value'
-p2.font.size = Pt(36)
-p2.font.color.rgb = TEAL_ACCENT
-p2.font.name = 'Segoe UI'
+p2.font.size = Pt(32)
+p2.font.color.rgb = ACCENT4
+p2.font.name = FONT_BODY
 p2.font.bold = False
 p2.alignment = PP_ALIGN.LEFT
 p2.space_before = Pt(4)
 # Spacer
 p3 = tf.add_paragraph()
 p3.text = ''
-p3.space_before = Pt(20)
+p3.space_before = Pt(16)
 # Tagline
 p4 = tf.add_paragraph()
 p4.text = 'Govern AI Agents with the Controls You Already Trust'
 p4.font.size = Pt(16)
-p4.font.color.rgb = WHITE
-p4.font.name = 'Segoe UI'
+p4.font.color.rgb = LT2
+p4.font.name = FONT_BODY
 p4.alignment = PP_ALIGN.LEFT
 p4.space_before = Pt(8)
 # Customer/date line
 p5 = tf.add_paragraph()
 p5.text = '[Customer Name]  \u00b7  [Date]  \u00b7  4\u20136 Week Engagement'
 p5.font.size = Pt(13)
-p5.font.color.rgb = RGBColor(0xB0, 0xD0, 0xF0)
-p5.font.name = 'Segoe UI'
+p5.font.color.rgb = ACCENT6
+p5.font.name = FONT_BODY
 p5.alignment = PP_ALIGN.LEFT
 p5.space_before = Pt(12)
 
-# Thin accent bar
-accent_bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(1.5), Inches(4.55), Inches(3.0), Inches(0.04))
+# Horizontal divider line (lavender)
+accent_bar = slide.shapes.add_shape(
+    MSO_SHAPE.RECTANGLE, Inches(0.62), Inches(4.49),
+    Inches(5.0), Inches(0.03)
+)
 accent_bar.fill.solid()
-accent_bar.fill.fore_color.rgb = TEAL_ACCENT
+accent_bar.fill.fore_color.rgb = ACCENT4
 no_line(accent_bar)
 
 add_notes(slide, 'Welcome everyone. Today we\'re kicking off the Agent 365 Proof of Value \u2014 a focused engagement designed to show you how Microsoft brings AI agents under the same governance controls you already rely on for your people. Over the next 4 to 6 weeks, we\'ll prove this with your real agents, in your real environment.')
