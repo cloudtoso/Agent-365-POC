@@ -1,13 +1,13 @@
 from pptx import Presentation
-from pptx.util import Inches, Pt
+from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.oxml.ns import qn
 
 prs = Presentation()
-prs.slide_width = Inches(13.333)
-prs.slide_height = Inches(7.5)
+prs.slide_width = Emu(12192000)
+prs.slide_height = Emu(6858000)
 
 # === COLOR PALETTE (BAR Light theme from reference deck) ===
 DK1 = RGBColor(0x00, 0x00, 0x00)
@@ -31,8 +31,8 @@ HEADER_GRADIENT_1 = RGBColor(0xBA, 0xBA, 0xFF)   # Light blue-purple
 HEADER_GRADIENT_2 = RGBColor(0x27, 0x64, 0xE7)   # Medium blue
 WARM_GRAY_BG = RGBColor(0xF2, 0xF0, 0xED)        # bg1 at 95% luminosity
 
-SLIDE_W = Inches(13.333)
-SLIDE_H = Inches(7.5)
+SLIDE_W = Emu(12192000)
+SLIDE_H = Emu(6858000)
 
 # Font families matching reference deck
 FONT_HEADING = 'Segoe UI Semibold'
