@@ -479,6 +479,20 @@ content_slide('Why This Matters: One Console, One Incident Queue',
      'Competing solutions require separate agent monitoring tools with manual SIEM forwarding'],
     'The differentiator is "first-class." Agents aren\'t bolted onto Defender as a custom data source \u2014 they\'re native assets.\n\nCISO Talking Points:\n- "Agent threats appear in the same Defender incident queue as user and endpoint threats \u2014 one priority list, one triage workflow."\n- "Correlation between agent and human activity happens automatically."\n- "Your SOC doesn\'t need an \'agent security\' specialization. Existing Defender skills apply directly."\n- "Automated response playbooks can isolate or disable a compromised agent the same way they isolate an endpoint."\n\nCIO Talking Points:\n- "No new security tool to procure for agent-specific threat detection."\n- "SOC headcount doesn\'t increase proportionally with agent count."\n- "MTTD and MTTR benefit from the same automation and AI-assisted investigation."\n\nIf asked about alert fatigue: Correlation reduces total alert volume. A compromised agent + DLP flag = one correlated incident, not three separate alerts.\nIf asked about agent-specific dashboards: Defender supports filtered views \u2014 agent-specific dashboards while benefiting from unified correlation.')
 
+content_slide('Advanced Hunting: AIAgentsInfo Table',
+    ['Defender XDR advanced hunting includes the AIAgentsInfo table \u2014 populated via Agent 365 connectors',
+     'Filter with RegistrySource == "A365" for Agent 365 data',
+     'Key columns: AIAgentId, AIAgentName, AgentStatus, Instructions, AgentActionTriggers, IsBlocked',
+     'Enables proactive threat hunting directly from the SOC console'],
+    'Advanced hunting gives your SOC team the ability to proactively query agent data alongside all other Defender XDR telemetry. The AIAgentsInfo table surfaces your full Agent 365 inventory \u2014 enabling threat hunters to identify misconfigurations, risky agents, and security gaps before they become incidents.\n\nDetailed procedure: demo-steps.md, UC4 Step 10')
+
+content_slide('Hunting Queries: Agent Inventory and Security Risks',
+    ['Query 1 \u2014 List All Agents: Full inventory with owner/creator UPNs from the SOC console',
+     'Query 2 \u2014 Agents Without Instructions: Published agents missing system prompts are vulnerable to prompt injection',
+     'Query 3 \u2014 MCP Tools Configured: Agents with remote MCP servers extend capabilities but increase attack surface',
+     'Query 4 \u2014 Non-HTTPS Endpoints: Agents communicating over unencrypted HTTP expose data in transit'],
+    'Four key hunting queries that demonstrate proactive security posture management:\n\n1. List All Agents \u2014 Visibility into the full agent inventory from within the SOC console.\n2. Agents Without Instructions \u2014 High-risk: vulnerable to prompt injection without defined behavioral boundaries. Recommendation: ensure all agents have well-defined instructions.\n3. MCP Tools Configured \u2014 MCP extends capabilities but introduces security considerations. Recommendation: confirm tools are required, review for least privilege, remove unnecessary tools.\n4. Non-HTTPS Endpoints \u2014 Exposes data to interception/tampering. Recommendation: update all HTTP actions to HTTPS.\n\nThese queries shift the SOC from reactive alerting to proactive posture management for AI agents.')
+
 # === UC5 ===
 section_divider('Use Case 5', 'Audit, Compliance, and Lifecycle')
 

@@ -342,6 +342,35 @@
    - Show runtime protection policy: "Block high-confidence prompt injection"
    - Show that Simulation B was not just detected but actively blocked at runtime
 
+10. **Advanced Hunting: AIAgentsInfo Table**
+    - Left nav → **Hunting** → **Advanced hunting**
+    - Show the `AIAgentsInfo` table schema (highlight key columns: AIAgentId, AIAgentName, AgentStatus, Instructions, AgentActionTriggers, IsBlocked)
+    - Note: Filter with `RegistrySource == "A365"` for Agent 365 data
+    
+    **Run Query 1: List All Agents**
+    - Paste and run the "List all agents" query
+    - KQL: Query AIAgentsInfo where RegistrySource == "A365", join with IdentityInfo for UPN resolution, project agent creation time, name, owner, creator, developer name
+    - Show results: all published agents with owner UPNs, creator UPNs, developer names
+    - Highlight: "Full agent inventory accessible directly from the SOC hunting console"
+    
+    **Run Query 2: Agents Without Instructions (Security Risk)**
+    - Paste and run the "Published agents without instructions" query
+    - Show results: agents that are published but have empty/missing system instructions
+    - Explain risk: "Agents without instructions are vulnerable to prompt injection — no defined behavioral boundaries"
+    - Recommendation: "Ensure all generative agents have well-defined instructions specifying purpose, boundaries, and allowed actions"
+    
+    **Run Query 3: MCP Tools Configured**
+    - Paste and run the MCP tools query
+    - Show results: agents with Model Context Protocol (MCP) tools configured
+    - Explain risk: "MCP tools extend agent capabilities but increase attack surface — can execute advanced operations and interact with external resources"
+    - Recommendation: "Confirm necessity with agent owner, enforce least privilege, remove unused tools"
+    
+    **Run Query 4: Non-HTTPS Endpoints**
+    - Paste and run the HTTP endpoints query
+    - Show results: agents communicating over unencrypted HTTP channels
+    - Explain risk: "Unencrypted HTTP exposes data in transit to interception and tampering"
+    - Recommendation: "Update all agent HTTP actions to HTTPS endpoints"
+
 ### Expected Results
 | Step | What Audience Sees |
 |------|-------------------|
@@ -350,6 +379,7 @@
 | 7 | Attack path graph with agent named as entity |
 | 8 | Agent incidents in same SOC queue as user incidents |
 | 9 | Runtime protection actively blocking threats (not just detecting) |
+| 10 | Advanced hunting queries surfacing agent inventory, misconfigurations, and security risks |
 
 ### Validation Checkpoints
 - ✅ Agent appears in Defender identity inventory
@@ -358,6 +388,8 @@
 - ✅ Attack path visualization renders with agent as node
 - ✅ Alert routes to SOC incident queue
 - ✅ Runtime protection demonstrates active block (not just alert)
+- ✅ Advanced hunting queries execute successfully and return expected agent data
+- ✅ AIAgentsInfo table is populated with Agent 365 data (RegistrySource == "A365")
 
 ### Troubleshooting Tips
 | Issue | Fix |
@@ -367,9 +399,11 @@
 | Attack path not rendering | Requires Defender CSPM or E5 license; verify attack path analysis is enabled |
 | Prompt injection not detected | Verify AI threat detection is enabled in Defender settings; use a more explicit injection pattern |
 | Alert doesn't route to SOC queue | Check alert routing rules include workload identity alerts; verify assignment rules |
+| AIAgentsInfo table empty or missing | Verify Agent 365 connector is configured in Defender XDR; check that RegistrySource == "A365" filter matches; confirm advanced hunting schema includes AI tables |
+| Hunting queries return no results | Ensure agents are published (not draft); verify data ingestion latency (may take up to 24h for initial population) |
 
 ### Time Estimate
-**12–15 minutes** (including simulations with 5-min wait times; consider pre-running simulations 10 min before demo)
+**17–20 minutes** (including simulations with 5-min wait times plus ~5 min for hunting queries; consider pre-running simulations 10 min before demo)
 
 > **Pro Tip:** Run simulations 10 minutes before the live demo starts. Then walk through the already-generated alerts during the demo to avoid awkward waiting.
 
