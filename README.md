@@ -1,5 +1,7 @@
 # Agent 365 Proof of Value (PoV) Enablement Kit
 
+Author: Christian Williams
+
 🤖 **One platform, one policy, one audit trail**
 
 This is the customer-facing **Agent 365 Proof of Value enablement kit** — a comprehensive set of materials for running customer demonstrations and PoV engagements that showcase how Agent 365 brings AI agents under enterprise identity, security, compliance, and observability controls.
@@ -183,3 +185,5 @@ This enablement kit is provided as-is for Microsoft and authorized partner use. 
 ---
 
 **One platform. One policy. One audit trail.** 🔐
+
+Note: Use at your own risk, no warranty implied nor extended.
