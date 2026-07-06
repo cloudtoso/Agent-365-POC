@@ -1,9 +1,9 @@
-# Agent 365 PoV — Demo Procedures
+# Agent 365 POC — Demo Procedures
 
 **Version:** 1.0
 **Last Updated:** 2026-05-05
 **Author:** Amos (Demo Engineer)
-**Purpose:** Click-by-click demo procedures for presales engineers delivering the Agent 365 PoV.
+**Purpose:** Click-by-click demo procedures for presales engineers delivering the Agent 365 POC.
 
 ---
 
@@ -636,7 +636,7 @@
 | Outlook | `https://outlook.office.com` | UC6 |
 
 ### Demo Flow Recommendation
-For a full PoV demo, present in order UC1 → UC2 → UC3 → UC4 → UC5 → UC6.
+For a full POC demo, present in order UC1 → UC2 → UC3 → UC4 → UC5 → UC6.
 - **Total time:** ~60–70 minutes (all 6 use cases)
 - **Abbreviated version (30 min):** UC1 (5 min) + UC2 (10 min) + UC3 (10 min) + UC6 (5 min)
 - **Security-focused (30 min):** UC2 (10 min) + UC3 (10 min) + UC4 (10 min)

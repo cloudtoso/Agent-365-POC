@@ -1,8 +1,8 @@
-# Agent 365 PoV — Security & Compliance Differentiator Messaging
+# Agent 365 POC — Security & Compliance Differentiator Messaging
 
 **Prepared by:** Avasarala (Security SME)
 **Date:** 2026-05-05
-**Purpose:** Customer-facing positioning, talking points, and objection handling for all 6 Agent 365 PoV use cases.
+**Purpose:** Customer-facing positioning, talking points, and objection handling for all 6 Agent 365 POC use cases.
 
 ---
 

@@ -1,4 +1,4 @@
-# Agent 365 Proof of Value — Slide Content
+# Agent 365 Proof of Concept — Slide Content
 
 > **Deck Purpose:** Customer enablement presentation demonstrating that Agent 365 brings AI agents under the same identity, security, compliance, and observability controls already trusted for users.
 > **Audience:** IT decision-makers, security leads, compliance officers
@@ -12,7 +12,7 @@
 
 ### Slide 1: Title Slide
 
-**Title:** Agent 365 — Proof of Value
+**Title:** Agent 365 — Proof of Concept
 
 **Bullets:**
 - Govern AI Agents with the Controls You Already Trust
@@ -20,7 +20,7 @@
 - 4–6 Week Engagement
 
 **Speaker Notes:**
-Welcome everyone. Today we're kicking off the Agent 365 Proof of Value — a focused engagement designed to show you how Microsoft brings AI agents under the same governance controls you already rely on for your people. Over the next 4 to 6 weeks, we'll prove this with your real agents, in your real environment.
+Welcome everyone. Today we're kicking off the Agent 365 Proof of Concept — a focused engagement designed to show you how Microsoft brings AI agents under the same governance controls you already rely on for your people. Over the next 4 to 6 weeks, we'll prove this with your real agents, in your real environment.
 
 **Visual Suggestion:** Full-bleed hero image showing a network of interconnected AI agent icons flowing into a unified Microsoft 365 shield. Customer logo and Microsoft logo side by side.
 
@@ -63,14 +63,14 @@ Agent 365 isn't a bolt-on product or a separate console. It extends the Microsof
 
 ### Slide 4: What We'll Prove in 4–6 Weeks
 
-**Title:** Proof of Value — Your Agents, Your Environment, Real Results
+**Title:** Proof of Concept — Your Agents, Your Environment, Real Results
 
 **Bullets:**
 - 6 use cases covering the full agent governance lifecycle
 - Executed against 3+ agents you identify from your environment
 - Built on your existing Entra, Purview, and Defender configurations
 - Measurable success criteria for every use case
-- Clear path from PoV to production rollout
+- Clear path from POC to production rollout
 
 **Speaker Notes:**
 This isn't a theoretical exercise. We'll work with agents your teams actually use — or plan to deploy. We'll configure each use case against your existing security and compliance posture, measure success against specific criteria, and at the end you'll have a clear decision framework for broader rollout. Let's look at what each use case covers.
@@ -126,7 +126,7 @@ In this demo, we'll open the M365 Admin Center and walk through the agent regist
 - 100% of known agents appear in the registry within 24 hours of deployment
 - Auto-discovery identifies at least 1 previously unknown agent in your tenant
 - Every registered agent has an assigned owner and risk classification
-- Zero agents operating outside the registry by end of PoV
+- Zero agents operating outside the registry by end of POC
 
 **Speaker Notes:**
 Success here is binary and measurable. By the end of this use case, every agent in your environment should be visible in the registry. We specifically look for the "aha moment" — when auto-discovery surfaces an agent that IT didn't know about. That's the value of native discovery vs. manual inventory.
@@ -216,14 +216,14 @@ In this demo, we'll create a dedicated Entra Agent ID, assign it the minimum per
 **Title:** How We Measure Success for Agent Identity
 
 **Bullets:**
-- Each PoV agent has a dedicated Entra Agent ID (no shared accounts)
+- Each POC agent has a dedicated Entra Agent ID (no shared accounts)
 - Conditional access policy correctly blocks agent activity outside defined boundaries
 - Sign-in logs capture every agent authentication event with full detail
 - Token scoping prevents access beyond assigned permissions
 - Least-privilege verified: agent cannot access resources outside its scope
 
 **Speaker Notes:**
-We'll validate that every agent in the PoV has its own identity, that conditional access actually stops the agent when boundaries are crossed, and that sign-in logs capture full authentication details. The most compelling moment is when we try to have the agent access something outside its scope — and it's blocked. That's least-privilege working as designed.
+We'll validate that every agent in the POC has its own identity, that conditional access actually stops the agent when boundaries are crossed, and that sign-in logs capture full authentication details. The most compelling moment is when we try to have the agent access something outside its scope — and it's blocked. That's least-privilege working as designed.
 
 **Visual Suggestion:** A checklist-style visual with pass/fail indicators. Include a highlighted "blocked" event in a sign-in log screenshot showing the conditional access policy denying an out-of-scope request.
 
@@ -590,21 +590,21 @@ Let's bring it all together. Over these weeks, we proved that Agent 365 delivers
 
 ---
 
-### Slide C-2: Next Steps — From PoV to Production
+### Slide C-2: Next Steps — From POC to Production
 
 **Title:** Broader Rollout: Extending Agent Governance Across Your Organization
 
 **Bullets:**
-- Expand from 3+ PoV agents to full agent estate
+- Expand from 3+ POC agents to full agent estate
 - Integrate agent governance into existing change management processes
 - Align agent lifecycle policies with your compliance calendar
 - Enable self-service agent registration with guardrails for development teams
 - Establish ongoing monitoring cadence with SOC team
 
 **Speaker Notes:**
-The PoV proved the technology works with your agents in your environment. The next step is broader rollout — extending governance to your full agent estate, integrating with change management, and enabling self-service registration so development teams can deploy agents responsibly. We'll work with you to build a rollout plan that matches your organizational readiness.
+The POC proved the technology works with your agents in your environment. The next step is broader rollout — extending governance to your full agent estate, integrating with change management, and enabling self-service registration so development teams can deploy agents responsibly. We'll work with you to build a rollout plan that matches your organizational readiness.
 
-**Visual Suggestion:** Expanding circles graphic: Inner circle = "PoV (3+ agents)" → Middle circle = "Phase 1 (department rollout)" → Outer circle = "Full estate governance." Timeline and milestones labeled on each ring.
+**Visual Suggestion:** Expanding circles graphic: Inner circle = "POC (3+ agents)" → Middle circle = "Phase 1 (department rollout)" → Outer circle = "Full estate governance." Timeline and milestones labeled on each ring.
 
 ---
 
@@ -615,12 +615,12 @@ The PoV proved the technology works with your agents in your environment. The ne
 **Bullets:**
 - Your Microsoft account team: [Account Team Contacts]
 - Agent 365 documentation: [Link to docs]
-- PoV completion report: [Will be delivered at engagement close]
+- POC completion report: [Will be delivered at engagement close]
 - FastTrack support for production deployment: [Link/contact]
 - Community and feedback: [Tech Community link]
 
 **Speaker Notes:**
-Thank you for your time and partnership throughout this Proof of Value. Your account team is here to support next steps — whether that's a broader rollout plan, FastTrack engagement, or connecting you with engineering for specific scenarios. We'll deliver the formal PoV completion report within one week of engagement close. Let's govern your agents the way you govern your people.
+Thank you for your time and partnership throughout this Proof of Concept. Your account team is here to support next steps — whether that's a broader rollout plan, FastTrack engagement, or connecting you with engineering for specific scenarios. We'll deliver the formal POC completion report within one week of engagement close. Let's govern your agents the way you govern your people.
 
 **Visual Suggestion:** Clean contact card layout with Microsoft branding. QR code linking to Agent 365 documentation. Account team photos/names in a professional grid layout.
 

@@ -72,7 +72,7 @@ def add_footer(slide):
     tf2 = id_box.text_frame
     tf2.word_wrap = False
     p2 = tf2.paragraphs[0]
-    p2.text = 'Agent 365  |  Proof of Value'
+    p2.text = 'Agent 365  |  Proof of Concept'
     p2.font.size = Pt(10)
     p2.font.color.rgb = BLACK
     p2.font.name = FONT_REGULAR
@@ -304,10 +304,10 @@ def hide_slide(slide):
 # === TITLE SLIDE ===
 make_title_slide(
     'Agent 365',
-    'Proof of Value',
+    'Proof of Concept',
     'Govern AI Agents with the Controls You Already Trust',
     '[Customer Name]  \u00b7  [Date]  \u00b7  4\u20136 Week Engagement',
-    notes='Welcome everyone. Today we\'re kicking off the Agent 365 Proof of Value \u2014 a focused engagement designed to show you how Microsoft brings AI agents under the same governance controls you already rely on for your people. Over the next 4 to 6 weeks, we\'ll prove this with your real agents, in your real environment.'
+    notes='Welcome everyone. Today we\'re kicking off the Agent 365 Proof of Concept \u2014 a focused engagement designed to show you how Microsoft brings AI agents under the same governance controls you already rely on for your people. Over the next 4 to 6 weeks, we\'ll prove this with your real agents, in your real environment.'
 )
 
 # === SLIDE 2 ===
@@ -328,12 +328,12 @@ content_slide('One Platform. Same Controls. Now for Agents.',
     'Agent 365 isn\'t a bolt-on product or a separate console. It extends the Microsoft 365 platform you already operate \u2014 Entra for identity, Purview for data protection, Defender for threat detection, and the M365 Admin Center for management. Your agents get the same controls as your employees.')
 
 # === SLIDE 4 ===
-content_slide('Proof of Value \u2014 Your Agents, Your Environment, Real Results',
+content_slide('Proof of Concept \u2014 Your Agents, Your Environment, Real Results',
     ['6 use cases covering the full agent governance lifecycle',
      'Executed against 3+ agents you identify from your environment',
      'Built on your existing Entra, Purview, and Defender configurations',
      'Measurable success criteria for every use case',
-     'Clear path from PoV to production rollout'],
+     'Clear path from POC to production rollout'],
     'This isn\'t a theoretical exercise. We\'ll work with agents your teams actually use \u2014 or plan to deploy. We\'ll configure each use case against your existing security and compliance posture, measure success against specific criteria, and at the end you\'ll have a clear decision framework for broader rollout.')
 
 # === UC1 ===
@@ -358,7 +358,7 @@ content_slide('How We Measure Success for Agent Discovery',
     ['100% of known agents appear in the registry within 24 hours of deployment',
      'Auto-discovery identifies at least 1 previously unknown agent in your tenant',
      'Every registered agent has an assigned owner and risk classification',
-     'Zero agents operating outside the registry by end of PoV'],
+     'Zero agents operating outside the registry by end of POC'],
     'Success here is binary and measurable. By the end of this use case, every agent in your environment should be visible in the registry. We specifically look for the "aha moment" \u2014 when auto-discovery surfaces an agent that IT didn\'t know about.')
 
 content_slide('Unified Registry \u2014 Native, Not Bolted On',
@@ -397,12 +397,12 @@ content_slide('Live Demo: Entra Agent ID and Conditional Access',
     'In this demo, we\'ll create a dedicated Entra Agent ID, assign it the minimum permissions needed for its function, and apply a conditional access policy. Then we\'ll trigger the agent to act, and you\'ll see its activity appear in the sign-in logs.\n\nDetailed procedure: demo-steps.md, UC2')
 
 content_slide('How We Measure Success for Agent Identity',
-    ['Each PoV agent has a dedicated Entra Agent ID (no shared accounts)',
+    ['Each POC agent has a dedicated Entra Agent ID (no shared accounts)',
      'Conditional access policy correctly blocks agent activity outside defined boundaries',
      'Sign-in logs capture every agent authentication event with full detail',
      'Token scoping prevents access beyond assigned permissions',
      'Least-privilege verified: agent cannot access resources outside its scope'],
-    'We\'ll validate that every agent in the PoV has its own identity, that conditional access actually stops the agent when boundaries are crossed, and that sign-in logs capture full authentication details.')
+    'We\'ll validate that every agent in the POC has its own identity, that conditional access actually stops the agent when boundaries are crossed, and that sign-in logs capture full authentication details.')
 
 content_slide('Why This Matters: No Parallel Identity Store',
     ['Agents live in the same Entra ID directory as your employees',
@@ -572,7 +572,7 @@ content_slide('Why This Matters: No Separate Agent UI',
     'The differentiator is seamlessness. Your users don\'t need a new app, a browser extension, or a sidebar.\n\nCISO Talking Points:\n- "Agents in familiar surfaces means users follow established security behaviors."\n- "No new client application means no new attack surface to secure, patch, or monitor."\n- "Security controls that apply to Teams and M365 apps apply to agent interactions within them."\n\nCIO Talking Points:\n- "Adoption cost is near zero. Users interact with agents in Teams and M365 apps they already use daily."\n- "No client deployment project. No MDM profile updates."\n- "IT admin overhead is configuration, not infrastructure."\n\nIf asked about specialized interfaces: Adaptive Cards in Teams support complex workflows without leaving the familiar surface.\nIf asked about controlling visibility: Agent visibility controlled through same Teams app permission policies and Entra ID group assignments.')
 
 # === CLOSING ===
-section_divider('Summary & Next Steps', 'From Proof of Value to Production')
+section_divider('Summary & Next Steps', 'From Proof of Concept to Production')
 
 content_slide('What We Proved: Agent Governance That Works Today',
     ['\u2705 UC1: Every agent discovered and registered \u2014 zero shadow agents',
@@ -584,20 +584,20 @@ content_slide('What We Proved: Agent Governance That Works Today',
     'Let\'s bring it all together. Over these weeks, we proved that Agent 365 delivers real, measurable governance across every dimension. And we did it using the tools and frameworks your teams already operate. No new consoles, no parallel systems, no learning curve.')
 
 content_slide('Broader Rollout: Extending Agent Governance Across Your Organization',
-    ['Expand from 3+ PoV agents to full agent estate',
+    ['Expand from 3+ POC agents to full agent estate',
      'Integrate agent governance into existing change management processes',
      'Align agent lifecycle policies with your compliance calendar',
      'Enable self-service agent registration with guardrails for development teams',
      'Establish ongoing monitoring cadence with SOC team'],
-    'The PoV proved the technology works with your agents in your environment. The next step is broader rollout \u2014 extending governance to your full agent estate, integrating with change management, and enabling self-service registration.')
+    'The POC proved the technology works with your agents in your environment. The next step is broader rollout \u2014 extending governance to your full agent estate, integrating with change management, and enabling self-service registration.')
 
 content_slide('Let\'s Keep the Conversation Going',
     ['Your Microsoft account team: [Account Team Contacts]',
      'Agent 365 documentation: [Link to docs]',
-     'PoV completion report: [Will be delivered at engagement close]',
+     'POC completion report: [Will be delivered at engagement close]',
      'FastTrack support for production deployment: [Link/contact]',
      'Community and feedback: [Tech Community link]'],
-    'Thank you for your time and partnership throughout this Proof of Value. Your account team is here to support next steps. We\'ll deliver the formal PoV completion report within one week of engagement close. Let\'s govern your agents the way you govern your people.')
+    'Thank you for your time and partnership throughout this Proof of Concept. Your account team is here to support next steps. We\'ll deliver the formal POC completion report within one week of engagement close. Let\'s govern your agents the way you govern your people.')
 
 # === APPENDIX ===
 section_divider('Appendix', 'Reference Materials')
@@ -608,8 +608,8 @@ content_slide('Roles & Responsibilities',
      'Identity Admin \u2014 Manages Entra ID agent identities, conditional access policies',
      'Data Security Lead \u2014 Configures Purview DLP, sensitivity labels for agents',
      'SOC Analyst \u2014 Monitors Defender alerts, investigates agent threats, runs response',
-     'Business Owners \u2014 Identify agents for PoV, validate success criteria alignment'],
-    'Reference slide: Roles involved in the Agent 365 Proof of Value engagement.')
+     'Business Owners \u2014 Identify agents for POC, validate success criteria alignment'],
+    'Reference slide: Roles involved in the Agent 365 Proof of Concept engagement.')
 
 content_slide('Agent Types in Scope',
     ['Microsoft 365 Copilot',
@@ -619,7 +619,7 @@ content_slide('Agent Types in Scope',
      'SharePoint agents',
      'Azure AI Foundry agents',
      'First-party Microsoft agents'],
-    'Reference slide: Agent types supported in the Agent 365 PoV. Note: Agent 365 is the governance capability set within Microsoft 365 \u2014 not a separately licensed product.')
+    'Reference slide: Agent types supported in the Agent 365 POC. Note: Agent 365 is the governance capability set within Microsoft 365 \u2014 not a separately licensed product.')
 
 content_slide('Glossary',
     ['Agent 365 \u2014 Microsoft 365 governance capability set for AI agents (not a separate SKU)',
@@ -631,7 +631,7 @@ content_slide('Glossary',
     'Reference slide: Key terms for mixed-audience understanding.')
 
 # Save
-output_path = r'C:\Users\chrwilliams\Agent-365-POC\Agent365-PoV-Deck.pptx'
+output_path = r'C:\Users\chrwilliams\Agent-365-POC\Agent365-POC-Deck.pptx'
 prs.save(output_path)
 print(f'SUCCESS: Saved to {output_path}')
 print(f'Total slides: {len(prs.slides)}')
