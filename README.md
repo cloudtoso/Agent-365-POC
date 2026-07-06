@@ -1,8 +1,8 @@
-# Agent 365 Proof of Value
+# Agent 365 Proof of Concept
 
 **Bring AI Agents Under Enterprise Control with Microsoft 365**
 
-This repository contains comprehensive enablement materials for Agent 365 Proof of Value engagements — a structured, 4–6 week program that demonstrates how Microsoft 365 delivers native governance, security, and compliance controls for AI agents.
+This repository contains comprehensive enablement materials for Agent 365 Proof of Concept engagements — a structured, 4–6 week program that demonstrates how Microsoft 365 delivers native governance, security, and compliance controls for AI agents.
 
 ## What Is Agent 365?
 
@@ -93,7 +93,7 @@ Unlike bolt-on agent governance tools or manual security frameworks, Agent 365 l
 
 | File | Purpose |
 |------|---------|
-| `Agent365-PoV-Deck.pptx` | 38–42 slide presentation deck with speaker notes, demo references, and executive talking points (ready to present) |
+| `Agent365-POC-Deck.pptx` | 38–42 slide presentation deck with speaker notes, demo references, and executive talking points (ready to present) |
 | `deck-outline.md` | Structural blueprint — 8 narrative sections with key messages and flow |
 | `slide-content.md` | Full slide content with speaker notes, visual suggestions, and talking points |
 | `demo-steps.md` | Click-by-click procedures for demonstrating all 6 use cases (60–70 min full, 30 min abbreviated) |
@@ -107,7 +107,7 @@ Unlike bolt-on agent governance tools or manual security frameworks, Agent 365 l
 ## 🚀 Getting Started
 
 ### For Presenters
-1. Open `Agent365-PoV-Deck.pptx` in PowerPoint
+1. Open `Agent365-POC-Deck.pptx` in PowerPoint
 2. Review speaker notes for each slide (included in the deck)
 3. Use the deck outline and slide content as reference materials
 4. Follow `demo-steps.md` to prepare live demonstrations
@@ -126,13 +126,13 @@ Unlike bolt-on agent governance tools or manual security frameworks, Agent 365 l
    pip install python-pptx
    python gen_deck.py
    ```
-4. The new `Agent365-PoV-Deck.pptx` will be created with your updates
+4. The new `Agent365-POC-Deck.pptx` will be created with your updates
 
 ---
 
 ## ✅ Prerequisites
 
-Before running a PoV engagement, ensure the following:
+Before running a POC engagement, ensure the following:
 
 ### Licensing & Trials
 - ✓ **Microsoft 365 E5** or **E7** (or equivalent with Purview and Defender XDR) on the customer's tenant
@@ -177,11 +177,11 @@ Before running a PoV engagement, ensure the following:
 The deck follows a proven **8-section narrative arc** designed to build urgency, demonstrate value, and drive to action:
 
 ### **Section 0: Opening (Slides 1–4)**
-**Goal:** Frame the problem and set PoV expectations
+**Goal:** Frame the problem and set POC expectations
 - Slide 1: Title slide and branding
 - Slide 2: "The Agent Governance Gap" — Establish the problem (shadow agents, ungoverned access, compliance blind spots)
 - Slide 3: "What Agent 365 Delivers" — One-slide value prop (identity, security, compliance, observability)
-- Slide 4: "PoV Scope & Timeline" — Set expectations (4–6 weeks, 6 use cases, your real agents)
+- Slide 4: "POC Scope & Timeline" — Set expectations (4–6 weeks, 6 use cases, your real agents)
 
 ### **Section 1: Agent Inventory & Discovery (Slides 5–9)**
 **Goal:** "We can see them" — Establish IT visibility and control foundation
@@ -223,8 +223,8 @@ The deck follows a proven **8-section narrative arc** designed to build urgency,
 
 ### **Section 7: Summary & Next Steps (Slides 35–38)**
 **Goal:** Drive to decision and action
-- PoV outcomes at a glance
-- CIO/CISO decision framework (what evidence the PoV produces)
+- POC outcomes at a glance
+- CIO/CISO decision framework (what evidence the POC produces)
 - Recommended next steps (expand scope, production rollout, timeline)
 - Closing slide with team contacts and resources
 
@@ -385,7 +385,7 @@ The `differentiators.md` file includes detailed objection handling for scenarios
 
 **Use Case Prioritization**
 - Customer not interested in threat detection? Move UC6 (Productivity) up in the narrative
-- Customer's priority is compliance? Front-load UC5 (Audit & Lifecycle) earlier in the PoV
+- Customer's priority is compliance? Front-load UC5 (Audit & Lifecycle) earlier in the POC
 - Customize the 6-use-case scope to 3–4 use cases if timeline is condensed to 3 weeks
 
 **Regional/Language Customization**
@@ -404,11 +404,11 @@ pip install python-pptx
 python gen_deck.py
 ```
 
-This will create an updated `Agent365-PoV-Deck.pptx` with your customizations while preserving the design system and formatting.
+This will create an updated `Agent365-POC-Deck.pptx` with your customizations while preserving the design system and formatting.
 
 ### When to Use Each Resource
 
-- **Agent365-PoV-Deck.pptx** — For live presentations and customer demos
+- **Agent365-POC-Deck.pptx** — For live presentations and customer demos
 - **Agent365-POC-Demo-Playbook.docx** — For detailed reference materials, printing, or local customization without regenerating
 - **demo-steps.md** — As your presales engineer's detailed click-by-click guide (view on screen during demos)
 - **differentiators.md** — As your pre-engagement research and objection handling reference (printed or bookmarked)
@@ -422,7 +422,7 @@ This kit is maintained by the Microsoft Agent 365 product and sales enablement t
 
 - Review `review-verdict.md` for internal context and assembly notes
 - Reach out to your Microsoft account team or partner manager for licensing and trial setup
-- Contact your local Microsoft field sales organization for pre-sales support and PoV coordination
+- Contact your local Microsoft field sales organization for pre-sales support and POC coordination
 
 ---
 

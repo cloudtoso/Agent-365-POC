@@ -1,4 +1,4 @@
-# Agent 365 PoV — Final Review Verdict
+# Agent 365 POC — Final Review Verdict
 
 **Reviewer:** Holden (Lead)  
 **Date:** 2026-05-05  
@@ -60,7 +60,7 @@ The deliverable set is strong, cohesive, and ready for assembly with minor corre
 
 3. **Add timing markers to slide content.** Naomi's doc has no per-slide timing guidance. Adding "~2 min" markers per slide would help presenters pace themselves.
 
-4. **Add a "Shortened PoV" slide variant.** Include a slide or appendix that maps abbreviated engagement options (3 UCs in 2 weeks, etc.) for customers who can't commit to 4–6 weeks.
+4. **Add a "Shortened POC" slide variant.** Include a slide or appendix that maps abbreviated engagement options (3 UCs in 2 weeks, etc.) for customers who can't commit to 4–6 weeks.
 
 5. **Clarify "Agent 365" as a solution name vs. product SKU.** All four docs use it as a solution brand, which is correct. But add a footnote in the deck (slide 3 or appendix) clarifying that Agent 365 is the governance capability set within Microsoft 365 — not a separately licensed product — to preempt customer procurement questions.
 
@@ -97,7 +97,7 @@ Include deck outline's A1–A3 slides. Add one more: **A4: Technical Accuracy No
 | Final .pptx | Customer | PowerPoint (stripped of internal notes) |
 | demo-steps.md | Presales engineer | Printed or second-screen reference |
 | differentiators.md | Presales engineer | Pre-read / objection prep |
-| deck-outline.md | Internal archive | Blueprint for future PoV decks |
+| deck-outline.md | Internal archive | Blueprint for future POC decks |
 
 ---
 

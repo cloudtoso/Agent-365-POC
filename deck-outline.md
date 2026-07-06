@@ -1,4 +1,4 @@
-# Agent 365 Proof of Value — Deck Outline
+# Agent 365 Proof of Concept — Deck Outline
 
 **Created:** 2026-05-05  
 **Author:** Holden (Lead)  
@@ -28,10 +28,10 @@ Each use case section follows a consistent 5-slide pattern: Context → Capabili
 
 | # | Slide Title | Purpose | Content Type |
 |---|------------|---------|--------------|
-| 1 | **Agent 365 Proof of Value** | Title slide — set branding and context | Title/branding |
+| 1 | **Agent 365 Proof of Concept** | Title slide — set branding and context | Title/branding |
 | 2 | **The Agent Governance Gap** | Frame the problem: AI agents are proliferating without the controls we apply to human users | Educational |
 | 3 | **What Agent 365 Delivers** | One-slide value prop: identity, security, compliance, observability — one platform | Educational |
-| 4 | **PoV Scope & Timeline** | Set expectations: Microsoft-platform agents, 4–6 weeks, 6 use cases, roles involved | Educational |
+| 4 | **POC Scope & Timeline** | Set expectations: Microsoft-platform agents, 4–6 weeks, 6 use cases, roles involved | Educational |
 
 **Flow note:** Slides 2–3 create urgency then resolve it. Slide 4 grounds the audience in what they'll see today.
 
@@ -125,8 +125,8 @@ Each use case section follows a consistent 5-slide pattern: Context → Capabili
 
 | # | Slide Title | Purpose | Content Type |
 |---|------------|---------|--------------|
-| 35 | **PoV Outcomes at a Glance** | Single-page summary: 6 use cases, key metrics achieved, governance posture | Educational |
-| 36 | **CIO/CISO Decision Framework** | What evidence the PoV produces for go/no-go approval decisions | Educational |
+| 35 | **POC Outcomes at a Glance** | Single-page summary: 6 use cases, key metrics achieved, governance posture | Educational |
+| 36 | **CIO/CISO Decision Framework** | What evidence the POC produces for go/no-go approval decisions | Educational |
 | 37 | **Recommended Next Steps** | Expand scope, production rollout path, timeline for full deployment | Educational |
 | 38 | **Thank You & Contact** | Closing slide with team contacts, resources, and follow-up commitments | Closing |
 
@@ -146,7 +146,7 @@ Each use case section follows a consistent 5-slide pattern: Context → Capabili
 
 ## Title Slide Content (Suggested)
 
-> **Agent 365 Proof of Value**  
+> **Agent 365 Proof of Concept**  
 > *Bringing AI Agents Under Enterprise Control*  
 > [Customer Logo] | [Microsoft Logo]  
 > [Date] | [Presenter Name]
@@ -156,7 +156,7 @@ Each use case section follows a consistent 5-slide pattern: Context → Capabili
 ## Closing Slide Content (Suggested)
 
 > **Next Steps**  
-> ✓ Review PoV findings with your governance board  
+> ✓ Review POC findings with your governance board  
 > ✓ Identify expansion candidates (additional agent types)  
 > ✓ Schedule production readiness review  
 >  
